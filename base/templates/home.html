@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="ja">
+    <link href="{% static '../static/css/omoide.css' %}" rel="stylesheet">
+    <title>
+        {% block title %}{{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}のOMOIDE{% endblock %}
+    </title>
+</head>
+<body>
+<p class="couple_name_title">{{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}の<span class="main_title">OMOIDE</span></p>
+{%block content%}
+<!-- <p class="datetime">&lt; 2021.12 &gt;</p> -->
+<div class="post_table">
+{% for OmoideTran in omoide_list %}
+    <div class="post_base">
+        <img src="static/images/ともきとちさと＿似顔絵.jpg" class="post_thumnail">
+        <p class="post_title">{{OmoideTran.title}}</p>
+    </div>
+{% endfor %}
+</div>
+<p class="page_transition_btn">1 &gt;</p>
+{%endblock%}
+<p class="post_btn">投稿する</p>
+</body>

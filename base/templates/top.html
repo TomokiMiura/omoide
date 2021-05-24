@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="ja">
+
+    <link href="{% static '../static/css/omoide.css' %}" rel="stylesheet">
+    <title>OMOIDE</title>
+</head>
+<body>
+<section class="top_left">
+        <div class="top_title">
+            <p class="main_title">OMOIDE</p>
+            <p class="sub_title">カップル専用 デジタル日記</p>
+            <p class="sub_title">二人の思い出をいつでもどこでも</p>
+        </div>
+</section> 
+<section class="top_right">
+    <div class="top_btn">
+        {% block content %}
+        <p class="login_btn">ログイン</p>
+        <p class="signup_btn">はじめての方はこちら</p>
+        {% endblock %}
+    </div>
+</section>
+</body>

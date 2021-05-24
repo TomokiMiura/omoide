@@ -1,0 +1,101 @@
+[
+
+    {
+
+        "model": "base.CoupleMaster",
+        "pk": 1,
+        "fields": {
+            "password": "aaa"
+        }
+
+    },
+
+    {
+
+        "model": "base.MenMaster",
+        "pk": 1,
+        "fields": {
+            "men_mail": "hoge@gmail.com",
+            "men_nickname": "テスト",
+            "couple_id": 1
+        }
+
+    },
+
+    {
+
+        "model": "base.GirlMaster",
+        "pk": 1,
+        "fields": {
+            "girl_mail": "fuga@gmail.com",
+            "girl_nickname": "テス子",
+            "couple_id": 1
+        }
+
+    },
+
+    {
+
+        "model": "base.OmoideTran",
+        "pk": 1,
+        "fields": {
+            "couple_id": 1,
+            "title": "テストとテス子の思い出",
+            "posttime":"2021-12-24T12:30:56.789Z"
+        }
+
+    },
+
+    {
+
+        "model": "base.TextTran",
+        "pk": 1,
+        "fields": {
+            "omoide_id": 1,
+            "men_id": 1,            
+            "posttime": "2021-12-24T12:34:56.789Z",
+            "text": "クリスマス、楽しかったね！"
+        }
+
+    },
+
+    {
+
+        "model": "base.TextTran",
+        "pk": 2,
+        "fields": {
+            "omoide_id": 1,
+            "girl_id": 1,
+            "posttime": "2021-12-24T12:35:56.789Z",
+            "text": "うん、楽しかったね！"
+        }
+
+    },
+
+    {
+
+        "model": "base.TextTran",
+        "pk": 3,
+        "fields": {
+            "omoide_id": 1,
+            "girl_id": 1,
+            "posttime": "2021-12-24T12:35:56.789Z",
+            "text": "また、やりたいね！"
+        }
+
+    },
+
+    {
+
+        "model": "base.TextTran",
+        "pk": 4,
+        "fields": {
+            "omoide_id": 1,
+            "men_id": 1,
+            "posttime": "2021-12-24T12:35:56.789Z",
+            "text": "もちろん！"
+        }
+
+    }
+
+]

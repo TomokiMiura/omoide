@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% block title %}{{ block.super }}{% endblock %}
+{% block content %}
+<p class="date_and_post_title">{{omoidetran.posttime.date}}</p>
+<p class="date_and_post_title">{{omoidetran.title}}</p>
+<div class="post_table">
+<!--サムネイル-->
+<img src="static/images/ともきとちさと＿似顔絵.jpg" class="post_img">
+</div>
+{% for post in post_list %}
+{% if post.girl_id == None %}
+<div class="post_table">
+<p class="mens_message">{{post.text}}</p>
+</div>
+{% else %}
+<div class="post_table">
+<p class="girls_message">{{post.text}}</p>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}
