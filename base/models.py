@@ -116,10 +116,11 @@ class OmoideTran(models.Model):
 
     )
 
-    posttime = models.DateTimeField(
+    posttime = models.DateField(
         
         '投稿日時',
-        auto_now_add=True,
+        blank=True,
+        null=True
 
     )
 
