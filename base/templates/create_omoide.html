@@ -2,7 +2,7 @@
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
 <h2>OMOIDEを作る</h2>
-<form class="" action="{% url 'create_omoide' %}" method="POST">
+<form class="" action="{% url 'base:create_omoide' %}" method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="">作成</button>

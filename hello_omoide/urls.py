@@ -24,4 +24,6 @@ urlpatterns = [
     path('signup',include('base.urls')),
     path('home',include('base.urls')),
     path('post',include('base.urls')),
+    path('create_omoide',include('base.urls')),
 ]
+

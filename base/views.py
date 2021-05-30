@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import ListView,DetailView
 from base.models import OmoideTran,MenMaster,GirlMaster,TextTran,CoupleMaster
-from . forms import OmoideCreateForm
+from . forms import OmoideCreateForm,OmoideForm
 
 
 def top(request):
@@ -49,7 +49,34 @@ class PostDetailView(DetailView):
         #ここまで
         return ctx
 
+
 def omoide_create(request):
+    template_name = 'create_omoide.html'
+    ctx = {}
+    if request.method == 'GET':
+        form = OmoideForm()
+        ctx['form'] = form
+        return render(request, template_name, ctx)
+    
+    if request.method == 'POST':
+        omoide_form = OmoideForm(request.POST)
+        if omoide_form.is_valid():
+            # topic_form.save()
+            omoide = OmoideTran()
+            cleaned_data = omoide_form.cleaned_data
+            omoide.title = cleaned_data['title']
+            omoide.couple_id = cleaned_data['couple_id']
+            omoide.posttime = cleaned_data['posttime']
+            omoide.save()            
+            return redirect(reverse_lazy('base:omoidelist'))
+        else:
+            ctx['form'] = omoide_form
+            return render(request, template_name, ctx)
+
+
+
+
+'''def omoide_create(request):
     template_name = 'create_omoide.html'
     ctx = {}
     if request.method == 'GET':
@@ -63,4 +90,4 @@ def omoide_create(request):
             return redirect(reverse_lazy('base:omoidelist'))
         else:
             ctx['form'] = omoide_form
-            return render(request, template_name, ctx)
+            return render(request, template_name, ctx)'''
