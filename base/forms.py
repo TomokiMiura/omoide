@@ -1,15 +1,12 @@
-from django import forms
+from django.forms import ModelForm
+from . models import OmoideTran
 
-class OmoideCreateForm(forms.Form):
-    title = forms.CharField(
-        label='タイトル',
-        max_length=30,
-        required=True,
-    )
 
-    posttime = forms.DateTimeField(
-        label='思い出の日',
-        required=True,
-        widget=forms.DateInput(attrs={"type": "date"}),
-        input_formats=['%Y-%m-%d']
-    )
+class OmoideCreateForm(ModelForm):
+    class Meta:
+        model=OmoideTran
+        fields=[
+            'couple_id',
+            'title',
+            'posttime',
+        ]

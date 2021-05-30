@@ -1,10 +1,11 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import ListView,DetailView
-from base.models import OmoideTran,MenMaster,GirlMaster,TextTran
+from base.models import OmoideTran,MenMaster,GirlMaster,TextTran,CoupleMaster
 from . forms import OmoideCreateForm
 
 
@@ -49,18 +50,17 @@ class PostDetailView(DetailView):
         return ctx
 
 def omoide_create(request):
-    form = OmoideCreateForm(request.POST or None)
-    if form.is_valid():
-        omoide = OmoideTran()
-        omoide.couple_id = 1
-        #テスト用のため、1に設定
-        omoide.title = form.cleaned_data['title']
-        omoide.posttime = form.cleaned_data['posttime']
-
-        OmoideTran.objects.create(
-            couple_id=omoide.couple_id,
-            title=omoide.title,
-            posttime=omoide.posttime,
-        )
-        return redirect('omoidelist')
-    return render(request, 'create_omoide.html', {'form': form})
+    template_name = 'create_omoide.html'
+    ctx = {}
+    if request.method == 'GET':
+        ctx['form'] = OmoideCreateForm()
+        return render(request, template_name, ctx)
+    
+    if request.method == 'POST':
+        omoide_form = OmoideCreateForm(request.POST)
+        if omoide_form.is_valid():
+            omoide_form.save()
+            return redirect(reverse_lazy('base:omoidelist'))
+        else:
+            ctx['form'] = omoide_form
+            return render(request, template_name, ctx)
