@@ -246,3 +246,13 @@ body {
     margin-bottom: 50px;
 
 }
+
+.form_design{
+
+    height: 100%;
+
+    display: flex;
+    justify-content: center; /*左右中央揃え*/
+    align-items: center;     /*上下中央揃え*/
+
+}

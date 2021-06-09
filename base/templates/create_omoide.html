@@ -1,11 +1,31 @@
 {% extends 'home.html' %}
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
-<h2>OMOIDEを作る</h2>
-<form class="" action="{% url 'create_omoide' %}" method="POST">
+<div class="form_design">
+<form class="form_block" action="{% url 'base:create_omoide' %}" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="">作成</button>
+    <p>
+        <label class="inputform_description">couple_id</label>
+        {{form.couple_id}}
+        {% for error in form.couple_id.errors %}
+        <p style="color: red;">{{error}}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <label class="inputform_description">二人の思い出にタイトルをつけてね💕</label>
+        {{form.title}}
+        {% for error in form.title.errors %}
+        <p style="color: red;"></p>{{error}}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <label class="inputform_description">いつの出来事？</label>
+        {{form.posttime}}
+        {% for error in form.posttime.errors %}
+        <p style="color: #00FF00;">{{error}}</p>
+        {% endfor %}
+    </p>
+    <button type="submit" class="ui button">作成</button>
 </form>
 </div>
 {% endblock %}
