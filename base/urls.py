@@ -10,6 +10,6 @@ urlpatterns = [
     path('signup',views.signup,name='signup'),
     path('home', views.OmoideListView.as_view(), name='omoidelist'),
     path('post/<int:pk>/',views.PostDetailView.as_view(),name='post'),
-    path('create_omoide/', views.omoide_create, name='create_omoide'),
+    path('create_omoide/', views.OmoideFormView.as_view(), name='create_omoide'),
 
 ]

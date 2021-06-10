@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,CreateView,FormView
 from base.models import OmoideTran,MenMaster,GirlMaster,TextTran,CoupleMaster
 from . forms import OmoideCreateForm
 
@@ -49,18 +49,11 @@ class PostDetailView(DetailView):
         #ここまで
         return ctx
 
-def omoide_create(request):
+class OmoideFormView(FormView):
     template_name = 'create_omoide.html'
-    ctx = {}
-    if request.method == 'GET':
-        ctx['form'] = OmoideCreateForm()
-        return render(request, template_name, ctx)
-    
-    if request.method == 'POST':
-        omoide_form = OmoideCreateForm(request.POST)
-        if omoide_form.is_valid():
-            omoide_form.save()
-            return redirect(reverse_lazy('base:omoidelist'))
-        else:
-            ctx['form'] = omoide_form
-            return render(request, template_name, ctx)
+    form_class = OmoideCreateForm
+    success_url = reverse_lazy('base:omoidelist')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
