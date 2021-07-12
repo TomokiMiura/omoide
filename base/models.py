@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 # Create your models here
 class CoupleMasterManager(models.Manager):
@@ -120,15 +121,22 @@ class OmoideTran(models.Model):
         
         '投稿日時',
         blank=True,
-        null=True
+        null=True,
 
+    )
+
+    thumbnail = models.ImageField(
+        verbose_name='サムネイル',
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        upload_to='thumbnail/%Y/%m/%d/',
+        null=True,
+        blank=True,
     )
 
     objects = OmoideTranManager()
 
     def __str__(self):
         return self.title
-    #sumnail_imageはここに追加
 
 #class MenPictureTran(models.Model):
 #class GirlPictureTran(models.Model):
@@ -168,11 +176,19 @@ class TextTran(models.Model):
     )
 
     text = models.TextField(
+        
+        verbose_name = 'コメント',
+        null=True,
+        blank=True,
 
-        verbose_name = '本文',
-        null=False,
-        blank=False,
+    )
 
+    image = models.ImageField(
+        verbose_name='画像',
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        upload_to='images/%Y/%m/%d/',
+        null=True,
+        blank=True,
     )
 
     objects = TextTranManager()

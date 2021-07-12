@@ -5,22 +5,39 @@
     <meta http-equiv="content-language" content="ja">
     <link href="{% static '../static/css/omoide.css' %}" rel="stylesheet">
     <title>
-        {% block title %}{{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}のOMOIDE{% endblock %}
+        {% block title %}
+        {{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}
+        のOMOIDE
+        {% endblock %}
     </title>
 </head>
 <body>
-<p class="couple_name_title">{{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}の<span class="main_title">OMOIDE</span></p>
+<p class="couple_name_title">{{ men_nickname_ctx }}💓{{ girl_nickname_ctx }}の<span class="main_title"><a href="{% url 'base:omoidelist' %}">OMOIDE</a></span></p>
 {%block content%}
-<!-- <p class="datetime">&lt; 2021.12 &gt;</p> -->
+<!-- 検索フォームスタート -->
+<form action="{% url 'search:result' %}" method="GET">
+    <div class="" style="width: 100%;">
+        <input type="text" placeholder="検索" name="q">
+        <button type="submit" class=""><i class="">検索</i></button>
+    </div>
+</form> 
+<!-- 検索フォーム終わり -->
+<!-- 思い出一覧 -->
 <div class="post_table">
-{% for OmoideTran in omoide_list %}
+{% for omoide in omoide_list %}
     <div class="post_base">
-        <img src="static/images/ともきとちさと＿似顔絵.jpg" class="post_thumnail">
-        <p class="post_title">{{OmoideTran.title}}</p>
+        <div class="edit_btn"><a href="{% url 'base:confirm_omoide' pk=omoide.pk%}">🖋</a></div>
+        {% if omoide.thumbnail %}
+        <a href="{{omoide.thumbnail.url}}" target="_blank" rel="noopener noreferrer"><img src="{{omoide.thumbnail.url}}" width=300px class="thumbnail"></a>
+        {% endif %}
+        <p class="post_title"><a href="{% url 'base:post' pk=omoide.id %}">{{omoide.title}}</a></p>
     </div>
 {% endfor %}
 </div>
-<p class="page_transition_btn">1 &gt;</p>
+<!-- 思い出一覧終わり -->
+<!-- ページネーション -->
+{% include "pagination.html" %}
+<!-- 思い出作成ボタン -->
+<div class="post_btn"><a href="{% url 'base:create_omoide' %}">思い出を残す</a></div>
 {%endblock%}
-<p class="post_btn">投稿する</p>
 </body>

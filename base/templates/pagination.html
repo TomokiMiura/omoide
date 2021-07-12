@@ -1,0 +1,30 @@
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+    <div class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <span>👈</span>
+      </a>
+    </div>
+    {% endif %}
+    {% for num in paginator.page_range %}
+    {% if page_obj.number == num %}
+    <div class="page-item">
+      <span class="page-link">
+        {{ num }}
+      </span>
+    </div>
+    {% else %}
+    <div class="page-item">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <div class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+        <span>👉</span>
+      </a>
+    </div>
+    {% endif %}
+    <div class="clear-both"></div>
+{% endif %}

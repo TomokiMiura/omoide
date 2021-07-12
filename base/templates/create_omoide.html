@@ -1,31 +1,39 @@
 {% extends 'home.html' %}
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
-<div class="form_design">
-<form class="form_block" action="{% url 'base:create_omoide' %}" method="POST">
+<div class="create_omoide_input_form">
+<form  action="{% url 'base:create_omoide'　%}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>
+    <p class="input_form">
         <label class="inputform_description">couple_id</label>
         {{form.couple_id}}
         {% for error in form.couple_id.errors %}
         <p style="color: red;">{{error}}</p>
         {% endfor %}
     </p>
-    <p>
-        <label class="inputform_description">二人の思い出にタイトルをつけてね💕</label>
+    <p class="input_form">
+        <label class="inputform_description">二人の思い出にタイトルをつけてね💕</label><br>
         {{form.title}}
         {% for error in form.title.errors %}
-        <p style="color: red;"></p>{{error}}</p>
+        <p style="color: blue;">{{error}}</p>
         {% endfor %}
     </p>
-    <p>
-        <label class="inputform_description">いつの出来事？</label>
+    <p class="input_form">
+        <label class="inputform_description">いつの出来事？</label><br>
         {{form.posttime}}
         {% for error in form.posttime.errors %}
-        <p style="color: #00FF00;">{{error}}</p>
+        <p style="color: yellow;">{{error}}</p>
         {% endfor %}
     </p>
-    <button type="submit" class="ui button">作成</button>
+    <p class="input_form">
+        <label class="inputform_description">思い出の写真を登録してね！</label><br>
+        {{form.thumbnail}}
+        {% for error in form.thumbnail.errors %}
+        <p style="color: green;">{{error}}</p>
+        {% endfor %}
+    </p>
+    <input type="submit" class="" name="next" value="confirm">これで決定！</input>
+    <input type="submit" class="" name="next" value="back">戻る...🥺</input>
 </form>
 </div>
 {% endblock %}

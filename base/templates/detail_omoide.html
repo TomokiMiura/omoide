@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+{% block title %}{{ block.super }}{% endblock %}
+{% block content %}
+<p class="date_and_post_title">{{omoide.posttime}}</p>
+<p class="date_and_post_title">{{omoide.title}}</p>
+{% if omoide.thumbnail %}
+<div class="post_table">
+<a href="{{omoide.thumbnail.url}}" target="_blank"><img src="{{omoide.thumbnail.url}}" width=200px></a>
+</div>
+{% endif %}
+<!-- コメント表示 -->
+{% for comment in comment_list %}
+<!-- 画像とテキストが投稿された時 -->
+{% if comment.image %}
+    <div class="post_table">
+    <a href="{{comment.image.url}}" target="_blank" rel="noopener noreferrer"><img src="{{comment.image.url}}" width=300px></a>
+    </div>
+{% endif %}
+{% if comment.text %}
+<!-- 男の子が投稿したら背景がブルー -->
+    {% if comment.girl_id == None %}
+        <div class="post_table">
+        <p class="mens_message">{{comment.text}}</p>
+        </div>
+    {% else %}
+<!-- 女の子が投稿したら背景がピンク -->
+        <div class="post_table">
+        <p class="girls_message">{{comment.text}}</p>
+        </div>
+    {% endif %}
+{% endif %}
+{% endfor %}
+<!-- コメント投稿機能 -->
+<div class="post_table">
+    <form class="" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.text}}
+        {{form.image}}
+        {% for error in form.title.errors %}
+        {{error}}
+        {% endfor %}
+        <button class="post_btn" type="submit">コメントする</button>
+    </form>
+</div>
+{% endblock %}

@@ -10,6 +10,7 @@ body {
     "メイリオ", Osaka, "ＭＳ Ｐゴシック", "MS P Gothic", sans-serif;
     background-color: #FEF6E4;
     height: 100%;
+    position: relative;
     
 }
 
@@ -94,6 +95,7 @@ body {
 
     width: 500px;
     height: 50px;
+    box-shadow: 5px 5px 10px 0px #333333;
 
     display: flex;
     justify-content: center; /*左右中央揃え*/
@@ -200,13 +202,14 @@ body {
 
 .post_btn{
 
-    background: #001858;
+    background: #001858; 
     height: 121.34px;
     width: 121.34px;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     color: #FFFFFF;
+    box-shadow: 5px 5px 10px 0px #333333;
 
     display: flex;
     justify-content: center; /*左右中央揃え*/
@@ -216,7 +219,17 @@ body {
     bottom: 30px;
     right: 30px;
 
+}
 
+button {
+    /* butoonタグにおけるデフォルトのデザインの初期化 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    border: 0;
+    border-radius: 0;
+    background: #ccc;
 }
 
 .page_transition_btn{
@@ -239,6 +252,7 @@ body {
 .post_base{
     flex-basis: 300px;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .post_img{
@@ -247,12 +261,72 @@ body {
 
 }
 
-.form_design{
+.create_omoide_input_form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 
-    height: 100%;
+}
 
+.input_form{
+
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+}
+
+.page-item{
+
+    float:left;
+    background-color: #8BD3DD;
+    padding: 10px;
+    line-height: 100%;
+    margin-right: 20px;
+    border-bottom: 5px solid #5e5e5e;
+    width: 20px;
+    text-align: center;
+    color: #5E5E5E;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+}
+
+.clear-both{
+
+    clear:both;
+
+}
+
+.edit_btn{
+
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    float: right;
+    background-color: white;
+    position: absolute;
+    right: 10px;
+    box-shadow: 5px 5px 10px 0px #333333;
+    
     display: flex;
     justify-content: center; /*左右中央揃え*/
     align-items: center;     /*上下中央揃え*/
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    /* マウスが乗っていない時は表示されない */
+    opacity: 0;
+    
+}
+/*  */
+.post_base:hover .edit_btn{
+
+    opacity: 1;
 
 }

@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% block title %}{{ block.super }}{% endblock %}
+{% block content %}
+<p class="date_and_post_title">検索結果 - {{query}}</p>
+<form action="{% url 'search:result' %}" method="GET">
+    <div class="" style="width: 100%;">
+        <input type="text" placeholder="検索" name="q">
+        <button type="submit" class=""><i class="">検索する</i></button>
+    </div>
+</form> 
+<!-- 検索結果表示 -->
+<div class="post_table">    
+    {% if result_list %}
+        {% for result in result_list %}
+        <div class="post_base">
+            <p class="post_title"><a href="{% url 'base:post' pk=result.id %}">{{result.title}}</a></p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="">
+            <p>ごめんね...🥺</p>
+            <p>見つからなかったの...</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
