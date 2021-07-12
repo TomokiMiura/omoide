@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'base',
     'search',
+    'accounts',
 ]
 
 INTERNAL_IPS = [

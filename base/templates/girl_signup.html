@@ -1,6 +1,15 @@
 {% extends 'top.html' %}
 {% block content %}
-    <p class="inputform_description">彼氏さんのニックネーム</p>
+
+<form class="" action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="ui orange button" name="next" value="confirm" type="submit">確認</button>
+</form>
+
+
+
+    <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
     <div class="login_input"></div>
     <p class="inputform_description">彼氏さんのメールアドレス</p>
     <div class="login_input"></div>
@@ -10,5 +19,5 @@
     <div class="login_input"></div>
     <p class="inputform_description">ふたりのパスワード</p>
     <div class="login_input"></div>
-    <p class="signup_btn_on_signup">サインアップ</p>
+    <p class="signup_btn_on_signup">サインアップ</p> -->
 {% endblock %}

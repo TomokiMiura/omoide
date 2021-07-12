@@ -72,7 +72,7 @@ class OmoideCreateView(FormView):
         else:
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('base:top'))
-
+ 
 class OmoideConfirmView(UpdateView):
     template_name = 'confirm_omoide.html'
     model = OmoideTran
