@@ -27,15 +27,15 @@ class OmoideListView(ListView):
     context_object_name = 'omoide_list'
     paginate_by = 9
 
-    def get_context_data(self, **kwargs):
-        ctx= super().get_context_data(**kwargs)
-        #変更する必要あり
-        men = MenMaster.objects.all()
-        girl = GirlMaster.objects.all()
-        ctx['men_nickname_ctx'] = men[0].men_nickname
-        ctx['girl_nickname_ctx'] = girl[0].girl_nickname
-        #ここまで
-        return ctx
+    # def get_context_data(self, **kwargs):
+    #     ctx= super().get_context_data(**kwargs)
+    #     #変更する必要あり
+    #     men = MenMaster.objects.all()
+    #     girl = GirlMaster.objects.all()
+    #     ctx['men_nickname_ctx'] = men[0].men_nickname
+    #     ctx['girl_nickname_ctx'] = girl[0].girl_nickname
+    #     #ここまで
+    #     return ctx
 
 class PostDetailView(DetailView):
     template_name = 'post.html'
@@ -44,11 +44,11 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx= super().get_context_data(**kwargs)
-        men = MenMaster.objects.all()
-        girl = GirlMaster.objects.all()
+        # men = MenMaster.objects.all()
+        # girl = GirlMaster.objects.all()
         post_list = TextTran.objects.filter(omoide_id=self.kwargs['pk'])
-        ctx['men_nickname_ctx'] = men[0].men_nickname
-        ctx['girl_nickname_ctx'] = girl[0].girl_nickname
+        # ctx['men_nickname_ctx'] = men[0].men_nickname
+        # ctx['girl_nickname_ctx'] = girl[0].girl_nickname
         ctx['post_list'] = post_list
         #ここまで
         return ctx

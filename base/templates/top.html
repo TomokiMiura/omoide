@@ -18,8 +18,8 @@
 <section class="top_right">
     <div class="top_btn">
         {% block content %}
-        <p class="login_btn">ログイン</p>
-        <p class="signup_btn">はじめての方はこちら</p>
+        <p class="login_btn"><a href = "{% url 'accounts:login' %}">ログイン</a></p>
+        <p class="signup_btn"><a href = "{% url 'accounts:create_men_user' %}">はじめての方はこちら</a></p>
         {% endblock %}
     </div>
 </section>

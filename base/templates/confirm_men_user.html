@@ -1,13 +1,18 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕男性のユーザー登録画面💕</p>
+<p>💕入力内容を確認してね💕</p>
+<div>ニックネーム：{{form.cleaned_data.username}}</div>
+<div>メールアドレス:{{form.cleaned_data.email}}</div>
+<div>パスワード:********</div>
+            
 <form class="" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button class="ui orange button" name="next" value="confirm" type="submit">確認</button>
+    {% for field in form %}
+    {{field.as_hidden}}
+    {% endfor %}
+    <button class="" name="next" value="back" type="submit">修正</button>
+    <button class="" name="next" value="regist" type="submit">登録</button>
 </form>
-
-
 
     <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
     <div class="login_input"></div>

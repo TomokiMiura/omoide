@@ -23,6 +23,7 @@ class TextTranManager(models.Manager):
     pass
 
 class CoupleMaster(models.Model):
+
     password = models.CharField(
         verbose_name='パスワード',
         max_length=50,
@@ -40,6 +41,7 @@ class MenMaster(models.Model):
         max_length=100,
         null=False,
         blank=False,
+
     )
 
     men_nickname = models.CharField(

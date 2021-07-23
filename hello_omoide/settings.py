@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'base',
     'search',
+    # アカウント管理機能のため追加 現場で使えるDjango実践編参照
     'accounts',
 ]
+AUTH_USER_MODEL = 'accounts.User'
 
 INTERNAL_IPS = [
      '127.0.0.1',
@@ -109,6 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# ログイン後のリダイレクト先のURL
+LOGIN_REDIRECT_URL = '/home'
+
+# ログアウト後のリダイレクト先のURL
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -148,3 +155,9 @@ CACHES = {
         'LOCATION': 'my_cache_table',
     }
 }
+
+###############################
+#       Email settings        #
+###############################
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

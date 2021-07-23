@@ -1,0 +1,11 @@
+{% extends 'top.html' %}
+{% block content %}
+<div class="">
+<div class="">ユーザー名：{{user.username}}</div>
+<div class="item">E-mail：{% if user.email %}{{user.email}}{% else %}未設定{% endif %}</div>
+<div class="item">名字：{% if user.last_name %}{{user.last_name}}{% else %}未設定{% endif %}</div>
+<div class="item">名前：{% if user.first_name %}{{user.first_name}}{% else %}未設定{% endif %}</div>
+<div class="item">男性？：{% if user.is_men %}{{user.is_men}}{% else %}女性です{% endif %}</div>
+<div class="item">女性？：{% if user.is_girl %}{{user.is_girl}}{% else %}男性です{% endif %}</div>
+</div>
+{% endblock %}

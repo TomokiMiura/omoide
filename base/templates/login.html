@@ -1,8 +1,27 @@
 {% extends 'top.html' %}
 {% block content %}
-    <p class="inputform_description">メールアドレス</p>
+<p>💕ログインしてね💕</p>
+<form class="" action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="login_btn_on_login" value="confirm" type="submit">ログイン</button>
+</form>
+
+    <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
+    <div class="login_input"></div>
+    <p class="inputform_description">彼氏さんのメールアドレス</p>
+    <div class="login_input"></div>
+    <p class="inputform_description">彼女さんのニックネーム</p>
+    <div class="login_input"></div>
+    <p class="inputform_description">彼女さんのメールアドレス</p>
+    <div class="login_input"></div>
+    <p class="inputform_description">ふたりのパスワード</p>
+    <div class="login_input"></div>
+    <p class="signup_btn_on_signup">サインアップ</p> -->
+
+    <!-- <p class="inputform_description">メールアドレス</p>
     <div class="login_input"></div>
     <p class="inputform_description">パスワード</p>
     <div class="login_input"></div>
-    <p class="login_btn_on_login">ログイン</p>
+    <p class="login_btn_on_login">ログイン</p> -->
 {% endblock %}
