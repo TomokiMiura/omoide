@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from . models import OmoideTran,TextTran
+from . models import OmoideTran,TextTran,CoupleMaster
 import datetime
 
 class OmoideCreateForm(forms.ModelForm):

@@ -18,6 +18,8 @@ from .forms import (
     CustomUserChangeForm, CustomUserCreationForm, EmailChangeForm
 )
 
+from base.models import OmoideTran,TextTran,CoupleMaster
+
 # Create your views here.
 # 男性ユーザーを登録するためのビュー
 class MenUserCreateView(FormView):
@@ -36,9 +38,11 @@ class MenUserCreateView(FormView):
             return render(self.request, 'confirm_men_user.html', {'form': form})
         # 登録ボタンが押下されたら入力内容をフォームに保存
         elif self.request.POST['next'] == 'regist':
-            save_form=form.save()
-            ctx = {'men_pk':save_form.pk}
-            return super().form_valid(form)
+            set_form = form.save()
+            response = redirect(reverse_lazy('accounts:create_girl_user'))
+            # Cookieを使ってユーザー1のpkを保存
+            response.set_cookie('men_id', set_form.pk)
+            return response
         else:
             # 通常このルートは通らない
             return redirect(reverse_lazy('base:top'))
@@ -61,8 +65,14 @@ class GirlUserCreateView(FormView):
             return render(self.request, 'confirm_girl_user.html', {'form': form})
         # 登録ボタンが押下されたら入力内容をフォームに保存
         elif self.request.POST['next'] == 'regist':
-            form.save()
-            return super().form_valid(form)
+            set_form = form.save()
+            response = redirect(reverse_lazy('accounts:confirm'))
+            men_id = self.request.COOKIES['men_id']
+            # Cookieを使ってユーザー1のpkを保存
+            # response.set_cookie('girl_id', set_form.pk)
+            # CoupleMasterに男性ユーザー、女性ユーザーのpkを追加する
+            CoupleMaster.objects.create(men_id='men_id',girl_id = 'set_form.pk')
+            return response
         else:
             # 通常このルートは通らない
             return redirect(reverse_lazy('base:top'))
@@ -151,3 +161,4 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'registration/password_reset_complete.html'
+

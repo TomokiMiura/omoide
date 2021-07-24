@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import User
 from django.core.validators import FileExtensionValidator
 
 # Create your models here
@@ -24,80 +25,89 @@ class TextTranManager(models.Manager):
 
 class CoupleMaster(models.Model):
 
-    password = models.CharField(
-        verbose_name='パスワード',
-        max_length=50,
+    men_id = models.ForeignKey(
+        User,
+        related_name='男性のユーザーID',
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+    )
+
+    girl_id = models.ForeignKey(
+        User,
+        verbose_name='女性のユーザーID',
+        on_delete=models.CASCADE,
         null=False,
         blank=False,
     )
 
     objects = CoupleMasterManager()
     
-class MenMaster(models.Model):
+# class MenMaster(models.Model):
 
-    men_mail = models.EmailField(
+#     men_mail = models.EmailField(
         
-        verbose_name='彼氏のメールアドレス',
-        max_length=100,
-        null=False,
-        blank=False,
+#         verbose_name='彼氏のメールアドレス',
+#         max_length=100,
+#         null=False,
+#         blank=False,
 
-    )
+#     )
 
-    men_nickname = models.CharField(
-        verbose_name='彼氏のニックネーム',
-        max_length=10,
-        null=False,
-        blank=False,
-    )
+#     men_nickname = models.CharField(
+#         verbose_name='彼氏のニックネーム',
+#         max_length=10,
+#         null=False,
+#         blank=False,
+#     )
 
-    couple_id = models.ForeignKey(
+#     couple_id = models.ForeignKey(
 
-        CoupleMaster,
-        verbose_name='カップルID',
-        on_delete=models.CASCADE,
-        null=False,
-        blank=False,
+#         CoupleMaster,
+#         verbose_name='カップルID',
+#         on_delete=models.CASCADE,
+#         null=False,
+#         blank=False,
 
-    )
+#     )
 
-    objects = MenMasterManager()
+#     objects = MenMasterManager()
 
-    def __str__(self):
-        return self.men_nickname
+#     def __str__(self):
+#         return self.men_nickname
     
-class GirlMaster(models.Model):
+# class GirlMaster(models.Model):
 
-    girl_mail = models.EmailField(
+#     girl_mail = models.EmailField(
         
-        verbose_name='彼女のメールアドレス',
-        max_length=100,
-        null=False,
-        blank=False,
+#         verbose_name='彼女のメールアドレス',
+#         max_length=100,
+#         null=False,
+#         blank=False,
 
-    )
-    girl_nickname = models.CharField(
+#     )
+#     girl_nickname = models.CharField(
 
-        verbose_name='彼女のニックネーム',
-        max_length=10,
-        null=False,
-        blank=False,
-    )
+#         verbose_name='彼女のニックネーム',
+#         max_length=10,
+#         null=False,
+#         blank=False,
+#     )
 
-    couple_id = models.ForeignKey(
+#     couple_id = models.ForeignKey(
 
-        CoupleMaster,
-        verbose_name='カップルID',
-        on_delete=models.CASCADE,
-        null=False,
-        blank=False,
+#         CoupleMaster,
+#         verbose_name='カップルID',
+#         on_delete=models.CASCADE,
+#         null=False,
+#         blank=False,
 
-    )
+#     )
 
-    objects = GirlMasterManager()
+#     objects = GirlMasterManager()
 
-    def __str__(self):
-        return self.girl_nickname
+#     def __str__(self):
+#         return self.girl_nickname
 
 class OmoideTran(models.Model):
 
@@ -154,21 +164,29 @@ class TextTran(models.Model):
 
     )
 
-    men_id = models.ForeignKey(
-        MenMaster,
+    author_id = models.ForeignKey(
+        User,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
 
     )
 
-    girl_id = models.ForeignKey(
-        GirlMaster,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+    # men_id = models.ForeignKey(
+    #     User,
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True,
 
-    )
+    # )
+
+    # girl_id = models.ForeignKey(
+    #     GirlMaster,
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True,
+
+    # )
 
     posttime = models.DateTimeField(
         

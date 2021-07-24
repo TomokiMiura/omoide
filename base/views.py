@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from datetime import date, datetime
+from accounts.models import User
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse_lazy
@@ -8,7 +9,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import ListView,DetailView,CreateView,FormView,UpdateView
-from base.models import OmoideTran,MenMaster,GirlMaster,TextTran,CoupleMaster
+from base.models import OmoideTran,TextTran,CoupleMaster
 from . forms import OmoideCreateForm,TextModelForm
 
 
@@ -44,11 +45,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx= super().get_context_data(**kwargs)
-        # men = MenMaster.objects.all()
-        # girl = GirlMaster.objects.all()
         post_list = TextTran.objects.filter(omoide_id=self.kwargs['pk'])
-        # ctx['men_nickname_ctx'] = men[0].men_nickname
-        # ctx['girl_nickname_ctx'] = girl[0].girl_nickname
         ctx['post_list'] = post_list
         #ここまで
         return ctx

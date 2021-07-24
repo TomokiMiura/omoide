@@ -1,20 +1,16 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕入力内容を確認してね💕</p>
-<div>ニックネーム：{{form.cleaned_data.username}}</div>
-<div>メールアドレス:{{form.cleaned_data.email}}</div>
-{% for temp in men_id%}
-<div>{{temp}}</div>
-{% endfor %}
-<div>パスワード:********</div>
-            
+<p>💕二人の名前とメールアドレスを確認してね💕</p>
+<p>{{men_id}}</p>
+<p>{{girl_id}}</p>
+
 <form class="" action="" method="POST">
     {% csrf_token %}
     {% for field in form %}
-    {{field.as_hidden}}
+        {{field.as_hidden}}
     {% endfor %}
-    <button class="" name="next" value="back" type="submit">修正</button>
-    <button class="" name="next" value="regist" type="submit">登録</button>
+    <button class="" type="submit" name="next" value="back">戻る</button>
+    <button class="" type="submit" name="next" value="create">作成</button>
 </form>
 
     <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
