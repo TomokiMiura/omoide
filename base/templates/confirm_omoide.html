@@ -1,19 +1,14 @@
 {% extends 'home.html' %}
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="create_omoide_input_form">
 <p>内容を確認してね💕</p>
-<table>
-<p class="input_form">タイトル：{{form.title.value}}</p>
-
-<p class="input_form">思い出の日：{{form.posttime.value}}</p>
-
-<p class="input_form">サムネイル：{{form.thumbnail.value}}</p>
-</table>
 <form class="" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p}}
     <input class="" type="submit" value="OK!">
 </form>
 </div>
+{% endif %}
 {% endblock %}

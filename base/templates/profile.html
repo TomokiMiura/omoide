@@ -1,0 +1,10 @@
+{% extends 'top.html' %}
+{% block content %}
+<p>💕 登録情報が変更できるよ 💕</p>
+<div>ユーザー名：{{user.username}}</div>
+<div>E-mail：{% if user.email %}{{user.email}}{% else %}未設定{% endif %}</div>
+<div class="clearfix">
+<p class="ok_btn"><a href="{% url 'accounts:change' %}">変更する</a></p>
+<p class="back_btn"><a href="{% url 'base:omoidelist' %}">トップに戻る</a></p>
+</div>
+{% endblock %}

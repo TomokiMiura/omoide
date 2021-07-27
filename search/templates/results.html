@@ -2,10 +2,10 @@
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
 <p class="date_and_post_title">検索結果 - {{query}}</p>
-<form action="{% url 'search:result' %}" method="GET">
+<form class="search_box" action="{% url 'search:result' %}" method="GET">
     <div class="" style="width: 100%;">
-        <input type="text" placeholder="検索" name="q">
-        <button type="submit" class=""><i class="">検索する</i></button>
+        <input type="text" placeholder="キーワード検索" name="q">
+        <input type="submit" class="" value="検索する">
     </div>
 </form> 
 <!-- 検索結果表示 -->

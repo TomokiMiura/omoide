@@ -27,87 +27,21 @@ class CoupleMaster(models.Model):
 
     men_id = models.ForeignKey(
         User,
-        related_name='男性のユーザーID',
+        related_name='men_instance',
         on_delete=models.CASCADE,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     girl_id = models.ForeignKey(
         User,
-        verbose_name='女性のユーザーID',
+        related_name='girl_instance',
         on_delete=models.CASCADE,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     objects = CoupleMasterManager()
-    
-# class MenMaster(models.Model):
-
-#     men_mail = models.EmailField(
-        
-#         verbose_name='彼氏のメールアドレス',
-#         max_length=100,
-#         null=False,
-#         blank=False,
-
-#     )
-
-#     men_nickname = models.CharField(
-#         verbose_name='彼氏のニックネーム',
-#         max_length=10,
-#         null=False,
-#         blank=False,
-#     )
-
-#     couple_id = models.ForeignKey(
-
-#         CoupleMaster,
-#         verbose_name='カップルID',
-#         on_delete=models.CASCADE,
-#         null=False,
-#         blank=False,
-
-#     )
-
-#     objects = MenMasterManager()
-
-#     def __str__(self):
-#         return self.men_nickname
-    
-# class GirlMaster(models.Model):
-
-#     girl_mail = models.EmailField(
-        
-#         verbose_name='彼女のメールアドレス',
-#         max_length=100,
-#         null=False,
-#         blank=False,
-
-#     )
-#     girl_nickname = models.CharField(
-
-#         verbose_name='彼女のニックネーム',
-#         max_length=10,
-#         null=False,
-#         blank=False,
-#     )
-
-#     couple_id = models.ForeignKey(
-
-#         CoupleMaster,
-#         verbose_name='カップルID',
-#         on_delete=models.CASCADE,
-#         null=False,
-#         blank=False,
-
-#     )
-
-#     objects = GirlMasterManager()
-
-#     def __str__(self):
-#         return self.girl_nickname
 
 class OmoideTran(models.Model):
 
@@ -149,9 +83,6 @@ class OmoideTran(models.Model):
 
     def __str__(self):
         return self.title
-
-#class MenPictureTran(models.Model):
-#class GirlPictureTran(models.Model):
 
 class TextTran(models.Model):
 

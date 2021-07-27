@@ -38,10 +38,13 @@ class MenUserCreateView(FormView):
             return render(self.request, 'confirm_men_user.html', {'form': form})
         # 登録ボタンが押下されたら入力内容をフォームに保存
         elif self.request.POST['next'] == 'regist':
+            # Cookieを使ってユーザー1のpkを保存
             set_form = form.save()
             response = redirect(reverse_lazy('accounts:create_girl_user'))
+            # 男性のユーザーIDのみをレコードに追加
             # Cookieを使ってユーザー1のpkを保存
-            response.set_cookie('men_id', set_form.pk)
+            response.set_cookie('men_data', set_form)
+            CoupleMaster.objects.create(men_id=set_form)
             return response
         else:
             # 通常このルートは通らない
@@ -66,19 +69,24 @@ class GirlUserCreateView(FormView):
         # 登録ボタンが押下されたら入力内容をフォームに保存
         elif self.request.POST['next'] == 'regist':
             set_form = form.save()
-            response = redirect(reverse_lazy('accounts:confirm'))
-            men_id = self.request.COOKIES['men_id']
+            response = redirect(reverse_lazy('accounts:login'))
+            saved_id = self.request.COOKIES['men_data']
             # Cookieを使ってユーザー1のpkを保存
             # response.set_cookie('girl_id', set_form.pk)
             # CoupleMasterに男性ユーザー、女性ユーザーのpkを追加する
-            CoupleMaster.objects.create(men_id='men_id',girl_id = 'set_form.pk')
+            # 男性Userのインスタンスを作成
+            men_instance = User.objects.get(email=saved_id)
+            # 男性Userのインスタンスを元にCoupleMasterのインスタンスを作成
+            temp = CoupleMaster.objects.get(men_id=men_instance)
+            temp.girl_id = set_form
+            temp.save()
             return response
         else:
             # 通常このルートは通らない
             return redirect(reverse_lazy('base:top'))
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'user_profile.html'
+    template_name = 'profile.html'
     def get_queryset(self):
         return User.objects.get(id=self.request.user.id)
 
@@ -105,7 +113,7 @@ class UserChangeView(LoginRequiredMixin, FormView):
     Django組込みのUserを利用する場合のユーザー情報変更ビュー
     カスタムユーザーでは使用しない
     '''
-    template_name = 'registration/change.html'
+    template_name = 'change.html'
     form_class = UserInfoChangeForm
     success_url = reverse_lazy('accounts:profile')
     
@@ -119,8 +127,7 @@ class UserChangeView(LoginRequiredMixin, FormView):
         # 更新前のユーザー情報をkwargsとして渡す
         kwargs.update({
             'email' : self.request.user.email,
-            'first_name' : self.request.user.first_name,
-            'last_name' : self.request.user.last_name,
+            'username' : self.request.user.username,
         })
         return kwargs
 

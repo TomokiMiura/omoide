@@ -16,23 +16,21 @@ class UserInfoChangeForm(ModelForm):
         model = User
         fields = [
             'email',
+            'username',
         ]
 
-    def __init__(self, email=None, first_name=None, last_name=None, *args, **kwargs):
+    def __init__(self, email=None, username=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
         # ユーザーの更新前情報をフォームに挿入
         if email:
             self.fields['email'].widget.attrs['value'] = email
-        if first_name:
-            self.fields['first_name'].widget.attrs['value'] = first_name
-        if last_name:
-            self.fields['last_name'].widget.attrs['value'] = last_name
+        if username:
+            self.fields['username'].widget.attrs['value'] = username
 
     def update(self, user):
         user.email = self.cleaned_data['email']
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
+        user.username = self.cleaned_data['username']
         user.save()
 
 class EmailChangeForm(ModelForm):

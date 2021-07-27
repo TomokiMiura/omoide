@@ -1,6 +1,7 @@
 {% extends 'home.html' %}
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="create_omoide_input_form">
 <form  action="{% url 'base:create_omoide'　%}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -36,4 +37,5 @@
     <input type="submit" class="" name="next" value="back">戻る...🥺</input>
 </form>
 </div>
+{% endif %}
 {% endblock %}

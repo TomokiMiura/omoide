@@ -7,11 +7,7 @@ app_name = 'base'
 urlpatterns = [
 
     # サイトトップページのビュー
-    path('',views.top,name='base'),
-    # ログインページのビュー
-    path('login',views.login,name='login'),
-    # サインアップページのビュー
-    path('signup',views.signup,name='signup'),
+    path('',views.TopView.as_view(),name='base'),
     # ログイン後のトップページ(omoide一覧できる)のビュー
     path('home', views.OmoideListView.as_view(), name='omoidelist'),
     # omoideに紐づくコメントを一覧できるページのビュー

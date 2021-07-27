@@ -13,6 +13,10 @@ body {
     position: relative;
     
 }
+/* 全てのリンクに表示されるアンダーラインを削除 */
+a {
+    text-decoration:none; 
+}
 
 .top_left,.top_right{
 
@@ -50,6 +54,22 @@ body {
     margin: 0;
 }
 
+/* ページタイトルOMOIDEのリンクの色を指定する */
+
+.main_title a{
+
+    transition-property: color;
+    transition-duration: 0.2s;
+    transition-delay: 0.1s;
+    color: #000000;
+}
+
+/* ページタイトルにマウスを載せると色が変わる */
+
+.main_title a:hover{
+    color: #929292;
+}
+
 .sub_title{
 
     color: #5E5E5E;
@@ -62,6 +82,9 @@ body {
 .couple_name_title{
 
     font-weight: bold;
+    float: left;
+    width: 50%;
+    
 
 }
 
@@ -103,13 +126,13 @@ body {
 
 }
 
-.login_btn,.login_btn_on_login,.mens_message{
+.login_btn,.login_btn_on_login,.mens_message,.ok_btn,.execution_submit_btn{
 
     background-color: #8BD3DD;
 
 }
 
-.signup_btn,.signup_btn_on_signup,.girls_message{
+.signup_btn,.signup_btn_on_signup,.girls_message,.back_btn,.back_submit_btn{
 
     background-color: #F582AE;
 
@@ -200,6 +223,22 @@ body {
 
 }
 
+
+.post_title a{
+
+    color: #929292;
+    transition-property: color;
+    transition-duration: 0.2s;
+    transition-delay: 0.1s;
+
+}
+
+.post_title a:hover{
+
+    color:#dedede;
+
+}
+
 .post_btn{
 
     background: #001858; 
@@ -218,6 +257,21 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
+
+}
+
+.post_btn a{
+
+    color: #FFFFFF;
+    transition-property: color;
+    transition-duration: 0.2s;
+    transition-delay: 0.1s;
+
+}
+
+.post_btn a:hover{
+
+    color:#dedede;
 
 }
 
@@ -253,6 +307,10 @@ button {
     flex-basis: 300px;
     margin-bottom: 30px;
     position: relative;
+
+    box-shadow: 3px 3px 6px -2px #555,
+    3px 3px 8px rgba(255,255,255,0.8) inset;
+    
 }
 
 .post_img{
@@ -324,9 +382,154 @@ button {
     opacity: 0;
     
 }
-/*  */
 .post_base:hover .edit_btn{
 
     opacity: 1;
+
+}
+
+.search_box{
+    box-sizing: border-box;
+    width:230px;
+    margin-left: auto;
+    margin-bottom: 20px;
+
+}
+.search_box input[type="text"]{
+    background: #FFFFFF;
+    border: none;
+    height: 3.0em;
+}
+.search_box input[type="text"]:focus {
+    outline: 0;
+}
+.search_box input[type="submit"]{
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    background: #000000;
+    color: #fff;
+    outline : none;
+    height: 3em;
+}
+
+.search_box ::-webkit-input-placeholder {
+    color: #000000;
+}
+
+.text_for_icon{
+
+    margin-top: 0;
+    font-size: 8px;
+    width: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+
+}  
+
+.icon_image{
+
+    float: left;
+    margin: 16px 0px;
+    text-align: right;
+    width: 50%;
+
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+ }
+  
+ .icon_image::after {
+    content: "";
+    display: block;
+    clear: both;
+ }
+
+.key_icon_image{
+    float: left;
+    display: block;
+    margin-right: 50px;
+
+}
+
+.key_icon_image img{
+
+    display: block;
+
+}
+
+.key_icon_image p{
+
+    margin-top: 5px;
+    color: #000000;
+
+}
+
+.user_icon_image{
+    float: left;
+    display: block;
+    text-align: right;
+}
+
+.user_icon_image img{
+
+    display: block;
+
+}
+
+.user_icon_image p{
+
+    margin-top: 5px;
+    color: #000000;
+
+}
+
+.icon_wrap{
+
+    margin-left: 70%;
+
+}
+
+.ok_btn,.back_btn{
+
+    width: 100px;
+    height: 20px;
+    margin-top: 50px;
+    margin-right: 50px;
+    padding: 15px;
+    color: #FFFFFF;
+    text-align: center;
+
+    /*ボタンの角を丸くする*/
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    float: left;
+
+}
+
+.ok_btn a,.back_btn a{
+
+    color: #FFFFFF;
+
+}
+
+.execution_submit_btn,.back_submit_btn{
+
+-webkit-appearance: none;
+-moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    width: 200px;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+    margin-right: 50px;
 
 }

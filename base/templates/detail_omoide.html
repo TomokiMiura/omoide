@@ -1,6 +1,7 @@
 {% extends 'home.html' %}
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
 <p class="date_and_post_title">{{omoide.posttime}}</p>
 <p class="date_and_post_title">{{omoide.title}}</p>
 {% if omoide.thumbnail %}
@@ -42,4 +43,5 @@
         <button class="post_btn" type="submit">コメントする</button>
     </form>
 </div>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'top.html' %}
+{% block content %}
+<p>💕 登録情報が変更できるよ💕</p>
+<form class="" action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="execution_submit_btn" name="next" value="change" type="submit">変更する</button>
+    <button class="back_submit_btn" name="next" value="back" type="submit">戻る</button>
+</form>
+{% endblock %}
