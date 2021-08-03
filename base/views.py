@@ -20,7 +20,7 @@ class OmoideListView(ListView):
     template_name = 'home.html'
     queryset = OmoideTran.objects.order_by('-posttime')
     context_object_name = 'omoide_list'
-    paginate_by = 8
+    paginate_by = 6
 
     def get_queryset(self):
         # ログインユーザーに合わせて表示するomoideを動的に変える

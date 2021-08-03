@@ -1,30 +1,55 @@
 {% if is_paginated %}
+<div class="ui basic segment center aligned">
+    <div class="ui pagination menu">
+    <!--左矢印-->
     {% if page_obj.has_previous %}
-    <div class="page-item">
-      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-        <span>👈</span>
-      </a>
-    </div>
-    {% endif %}
-    {% for num in paginator.page_range %}
-    {% if page_obj.number == num %}
-    <div class="page-item">
-      <span class="page-link">
-        {{ num }}
-      </span>
-    </div>
+        <a class="item" href="?p={{page_obj.previous_page_number}}"><i class="chevron left icon"></i></a>
     {% else %}
-    <div class="page-item">
-      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-    </div>
+        <a class="disabled item"><i class="chevron left icon"></i></a>
     {% endif %}
+    <!--//左矢印-->
+    <!--ページ番号-->
+    {% for num in paginator.page_range %}
+      {% if page_obj.number == num %}
+            <a class="disabled item">{{num}}</a>
+        {% else %}
+            <a class="item" href="?page={{ num }}">{{num}}</a>
+        {% endif %}
     {% endfor %}
+    <!--//ページ番号-->
+    <!--右矢印-->
     {% if page_obj.has_next %}
-    <div class="page-item">
-      <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-        <span>👉</span>
-      </a>
-    </div>
+        <a class="item" href="?page={{page_obj.next_page_number}}"><i class="chevron right icon"></i></a>
+    {% else %}
+        <a class="disabled item"><i class="chevron right icon"></i></a>
     {% endif %}
-    <div class="clear-both"></div>
+    <!--//右矢印-->
+    </div>
+</div>
 {% endif %}
+
+<!-- {% if is_paginated %}
+{% if page_obj.has_previous %}
+  <div class="ui pagination menu">
+    <a class="item" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+      ←
+    </a>
+  {% endif %}
+  {% for num in paginator.page_range %}
+  {% if page_obj.number == num %}
+    <a class="active item">
+      {{ num }}
+    </a>
+  {% else %}
+    <a class="item" href="?page={{ num }}">
+      {{ num }}
+    </a>
+  {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <a class="item" href="?page={{ page_obj.next_page_number }}">
+      →
+    </a>
+  {% endif %}
+  </div>
+{% endif %} -->
