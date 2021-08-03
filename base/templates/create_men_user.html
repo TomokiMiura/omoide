@@ -1,21 +1,49 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕まず男性が登録してね💕</p>
-<form class="" action="" method="POST">
+<div class="ui medium header">💕まずは男性がユーザー登録してね💕</div>
+<form class="ui form error" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button class="" name="next" value="confirm" type="submit">確認</button>
+    <div class="field">
+        <label class="">メールアドレス</label>
+        {{form.email}}
+    </div>
+    <div class="field">
+        <label class="">ユーザーネーム</label>
+        {{form.username}}
+    </div>
+    <div class="field">
+        <label class="">性別を選んでね</label>
+        <div class="ui checkbox">
+            {{form.is_men}}
+            <label>男性はチェック</label>
+        </div>
+        <div class="ui checkbox">
+            {{form.is_girl}}
+            <label>女性はチェック</label>
+        </div>
+    </div>
+    <div class="field">
+        <label class="">{{form.password1.label}}</label>
+        {{form.password1}}
+    </div>
+    <div class="ui bulleted list">
+        <div class="item">
+            あなたの他の個人情報と似ているパスワードにはできません。
+        </div>
+        <div class="item">
+            パスワードは最低 8 文字以上必要です。
+        </div>
+        <div class="item">
+            よく使われるパスワードにはできません。
+        </div>
+        <div class="item">
+            数字だけのパスワードにはできません。
+        </div>
+    </div>
+    <div class="field">
+        <label class="">{{form.password2.label}}</label>
+        {{form.password2}}
+    </div>
+    <button class="fluid ui teal button" name="next" value="confirm" type="submit">確認</button>
 </form>
-
-    <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼氏さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">ふたりのパスワード</p>
-    <div class="login_input"></div>
-    <p class="signup_btn_on_signup">サインアップ</p> -->
 {% endblock %}

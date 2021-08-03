@@ -103,22 +103,6 @@ class TextTran(models.Model):
 
     )
 
-    # men_id = models.ForeignKey(
-    #     User,
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-
-    # )
-
-    # girl_id = models.ForeignKey(
-    #     GirlMaster,
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-
-    # )
-
     posttime = models.DateTimeField(
         
         '投稿日時',

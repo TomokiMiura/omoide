@@ -141,22 +141,22 @@ class CustomLogoutView(LogoutView):
 
 class CustomPasswordChangeView(PasswordChangeView):
     form_class = CustomPasswordChangeForm
-    template_name = 'registration/password_change_form.html'
+    template_name = 'password_change_form.html'
     success_url = reverse_lazy('accounts:password_change_done')
 
 class CustomPasswordChangeDoneView(PasswordChangeDoneView):
-    template_name = 'registration/password_change_done.html'
+    template_name = 'password_change_done.html'
 
 class CustomPasswordResetView(PasswordResetView):
-    email_template_name = 'registration/password_reset_email.html'
+    email_template_name = 'password_reset_email.html'
     form_class = CustomPasswordResetForm
-    from_email = 'info@example.com'
-    subject_template_name = 'registration/password_reset_subject.txt'
+    from_email = 'test.mail.for.omoide@gmail.com'
+    subject_template_name = 'password_reset_subject.txt'
     success_url = reverse_lazy('accounts:password_reset_done')
-    template_name = 'registration/password_reset_form.html'
+    template_name = 'password_reset_form.html'
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
-    template_name = 'registration/password_reset_done.html'
+    template_name = 'password_reset_done.html'
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
@@ -164,8 +164,8 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     post_reset_login = False
     post_reset_login_backend = None
     success_url = reverse_lazy('accounts:password_reset_complete')
-    template_name = 'registration/password_reset_confirm.html'
+    template_name = 'password_reset_confirm.html'
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = 'registration/password_reset_complete.html'
+    template_name = 'password_reset_complete.html'
 

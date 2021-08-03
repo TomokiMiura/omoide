@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-language" content="ja">
-
-    <link href="{% static '../static/css/omoide.css' %}" rel="stylesheet">
+    <link href="{% static 'css/semantic.css' %}" rel="stylesheet">
+    <link href="{% static 'css/omoide.css' %}" rel="stylesheet">
     <title>OMOIDE</title>
 </head>
 <body>
@@ -18,8 +18,17 @@
 <section class="top_right">
     <div class="top_btn">
         {% block content %}
-        <p class="login_btn"><a href = "{% url 'accounts:login' %}">ログイン</a></p>
-        <p class="signup_btn"><a href = "{% url 'accounts:create_men_user' %}">はじめての方はこちら</a></p>
+        <button class="fluid ui teal button">
+            <a href = "{% url 'accounts:login' %}">ログイン</a>
+        </button>
+        <div class="ui hidden divider"></div>
+        <button class="fluid ui pink button">
+            <a href = "{% url 'accounts:create_men_user' %}">はじめての方はこちら</a>
+        </button>
+        <div class="ui hidden divider"></div>
+        <button class="fluid ui button">
+            <a href = "{% url 'accounts:password_reset' %}">パスワードをお忘れの方はこちら</a>
+        </button>
         {% endblock %}
     </div>
 </section>

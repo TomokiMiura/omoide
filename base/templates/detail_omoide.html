@@ -2,46 +2,77 @@
 {% block title %}{{ block.super }}{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
-<p class="date_and_post_title">{{omoide.posttime}}</p>
-<p class="date_and_post_title">{{omoide.title}}</p>
+<!-- OMOIDEの年月日、タイトル、サムネイル表示 -->
+<h1 class="ui center aligned header">
+    <i class="calendar alternate outline icon"></i>
+    {{omoide.posttime}}
+</h1>
+<h1 class="ui center aligned header">
+    <i class="book icon"></i>
+    {{omoide.title}}
+</h1>
+<!-- OMOIDEの年月日とタイトル表示終わり-->
 {% if omoide.thumbnail %}
-<div class="post_table">
-<a href="{{omoide.thumbnail.url}}" target="_blank"><img src="{{omoide.thumbnail.url}}" width=200px></a>
+<!-- <div class="post_table"> -->
+<div class="ui centered card">
+    <div class="image">
+        <img class="" src="{{omoide.thumbnail.url}}">
+    </div>
 </div>
 {% endif %}
-<!-- コメント表示 -->
+<!-- OMOIDEの年月日、タイトル、サムネイル表示終わり-->
+<!-- 画像、テキスト投稿表示 -->
 {% for comment in comment_list %}
-<!-- 画像とテキストが投稿された時 -->
-{% if comment.image %}
-    <div class="post_table">
-    <a href="{{comment.image.url}}" target="_blank" rel="noopener noreferrer"><img src="{{comment.image.url}}" width=300px></a>
-    </div>
-{% endif %}
-{% if comment.text %}
-<!-- 男の子が投稿したら背景がブルー -->
-    {% if comment.girl_id == None %}
-        <div class="post_table">
-        <p class="mens_message">{{comment.text}}</p>
-        </div>
-    {% else %}
-<!-- 女の子が投稿したら背景がピンク -->
-        <div class="post_table">
-        <p class="girls_message">{{comment.text}}</p>
+    <!-- 画像の表示 -->
+    {% if comment.image %}
+        <div class="ui centered card">
+            <div class="image thumbnail_tag">
+                <div class="ui teal ribbon label">
+                    {{comment.author_id.username}}
+                </div>
+                <img src="{{comment.image.url}}">
+            </div>
         </div>
     {% endif %}
-{% endif %}
+    <!-- 画像の表示終わり -->
+    {% if comment.text %}
+    <!-- テキストメッセージの表示 -->
+    <!-- LGBTの方の投稿表示 -->
+        {% if comment.author_id.is_men %}
+            <!-- 男の子の投稿表示 -->
+            <div class="ui tertiary inverted teal center aligned raised padded text container segment">
+                    {{comment.text}}
+            </div>
+        {% else %}
+            <!-- 女の子が投稿したら背景が -->
+            <div class="ui tertiary inverted pink center aligned raised padded text container segment">
+                {{comment.text}}
+            </div>
+        {% endif %}
+    {% endif %}
 {% endfor %}
+<!-- 画像、テキスト投稿表示終わり -->
 <!-- コメント投稿機能 -->
-<div class="post_table">
-    <form class="" action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.text}}
-        {{form.image}}
-        {% for error in form.title.errors %}
-        {{error}}
-        {% endfor %}
-        <button class="post_btn" type="submit">コメントする</button>
-    </form>
+<div class="ui horizontal divider">
+メッセージ・画像を投稿する
 </div>
+<form class="ui form" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="field">
+        {{form.text}}
+        {% for error in form.title.errors %}
+            {{error}}
+        {% endfor %}
+    </div>
+    <div class="ui grid">
+        <div class="fourteen wide column field">
+            {{form.image}}
+        </div>
+        <div class="two wide column field">
+            <button class="ui stackable teal large button" type="submit">投稿する</button>
+        </div>
+    </div>
+</form>
 {% endif %}
+<!-- コメント投稿終わり -->
 {% endblock %}

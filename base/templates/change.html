@@ -1,10 +1,23 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕 登録情報が変更できるよ💕</p>
-<form class="" action="" method="POST">
+<p class="ui field">💕 登録情報が変更できるよ💕</p>
+<form class="ui form" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button class="execution_submit_btn" name="next" value="change" type="submit">変更する</button>
-    <button class="back_submit_btn" name="next" value="back" type="submit">戻る</button>
+    {% for field in form %}
+    <div class="field">
+        {{field.label_tag}}
+        {{field}}
+    </div>
+    {% endfor %}
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="column">
+                <button class="ui teal button" name="next" value="change" type="submit">変更</button>
+            </div>
+            <div class="column">
+                <button class="ui teal button"><a href="{% url 'accounts:profile'%}">戻る</a></button>
+            </div>
+        </div>
+    </div>
 </form>
 {% endblock %}

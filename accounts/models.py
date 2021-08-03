@@ -92,7 +92,7 @@ class User(AbstractUser):
     email = models.EmailField(
         'メールアドレス',
         unique=True,
-        help_text='この項目は必須です。メールアドレスは公開されません。',
+        help_text='',
         blank=False
     )
     is_men = models.BooleanField(

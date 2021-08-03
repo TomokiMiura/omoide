@@ -20,7 +20,7 @@ class OmoideListView(ListView):
     template_name = 'home.html'
     queryset = OmoideTran.objects.order_by('-posttime')
     context_object_name = 'omoide_list'
-    paginate_by = 9
+    paginate_by = 8
 
     def get_queryset(self):
         # ログインユーザーに合わせて表示するomoideを動的に変える
@@ -60,15 +60,34 @@ class OmoideCreateView(FormView):
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
             # 確認ボタンを押下したら、一度入力内容をDBに保存する
-            # DBに保存しつつ、インスタンスにも格納する
+            # DBに保存しつつ、そのインスタンスsaved_formを生成
             saved_form = form.save(self.request.user)
-            # pkと保存されたデータをOmoideConfirmViewに渡す
+            # 投稿確認viewへリダイレクト
             return redirect('base:confirm_omoide',pk=saved_form.pk)
         elif self.request.POST.get('next', '') == 'back':
             return render(self.request, 'create_omoide.html', ctx)
         else:
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('base:omoidelist'))
+
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        # current_user：現在のユーザーのインスタンス
+        current_user = self.request.user
+        # インスタンスcouple_instanceとして保存
+        couple_instance = CoupleMaster.objects.get(
+            Q(men_id=current_user) | Q(girl_id=current_user)
+        )
+        # 現在ユーザーが男性なら
+        if couple_instance.men_id == current_user:
+            # 女性ユーザーのインスタンスpair_userを作成
+            pair_user = couple_instance.girl_id
+        else:
+            # 男性ユーザーのインスタンスpair_userを作成
+            pair_user = couple_instance.men_id
+        ctx['current_username'] = current_user.username
+        ctx['pair_username'] = pair_user.username
+        return ctx
  
 class OmoideConfirmView(UpdateView):
     template_name = 'confirm_omoide.html'
@@ -76,9 +95,8 @@ class OmoideConfirmView(UpdateView):
     fields = ['title', 'posttime', 'thumbnail']
     success_url = reverse_lazy('base:omoidelist')
 
-    def get_context_data(self):
-        ctx = super().get_context_data()
-
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
         # current_user：現在のユーザーのインスタンス
         current_user = self.request.user
         # インスタンスcouple_instanceとして保存

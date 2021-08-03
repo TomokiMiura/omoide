@@ -3,12 +3,32 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="create_omoide_input_form">
-<p>内容を確認してね💕</p>
-<form class="" action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input class="" type="submit" value="OK!">
-</form>
+    <div class="ui medium header">内容を確認してね💕</div>
+    <form class="ui form error" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="field">
+            <label class="">思い出のタイトル</label>
+                {{form.title}}
+                {% for error in form.title.errors %}
+                    <p class="ui error message">{{error}}</p>
+                {% endfor %}
+        </div>
+        <div class="field">
+            <label class="">思い出の日</label>
+            {{form.posttime}}
+            {% for error in form.posttime.errors %}
+                <p class="ui error message">{{error}}</p>
+            {% endfor %}
+        </div>
+        <div class="field confirm_thumbnail">
+            <label class="">思い出の写真</label>
+            {{form.thumbnail}}
+            {% for error in form.thumbnail.errors %}
+                <p class="ui error message">{{error}}</p>
+            {% endfor %}
+        </div>
+        <button class="ui teal button" type="submit" value="">OK!</button>
+    </form>
 </div>
 {% endif %}
 {% endblock %}

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-language" content="ja">
-    <link href="{% static '../static/css/omoide.css' %}" rel="stylesheet">
+    <link href="{% static 'css/semantic.css' %}" rel="stylesheet">
+    <link href="{% static 'css/omoide.css' %}" rel="stylesheet">
     <title>
         {% block title %}
         {{ current_username }}💓{{ pair_username }}のOMOIDE
@@ -11,52 +12,76 @@
     </title>
 </head>
 <body>
-<div class="clearfix">
-    <p class="couple_name_title">{{ current_username }}💓{{ pair_username }}の<span class="main_title"><a href="{% url 'base:omoidelist' %}">OMOIDE</a></span></p>
-    <div class="icon_image">
-        <div class="icon_wrap">
-            <div class="key_icon_image">
-                <a href="{% url 'accounts:logout' %}">
-                <img src="static/images/icon_logout.png" alt="">
-                <p class="text_for_icon">ログアウト</p>
-                </a>
+<!-- メニュー -->
+<div class="ui teal four huge item inverted menu">
+    <a class="item header" href="{% url 'base:omoidelist' %}">
+        {{ current_username }}💓{{ pair_username }}のOMOIDE
+    </a>
+    <a class="item" href="{% url 'accounts:profile' %}">
+        <i class="ui centerd user icon"></i>
+        プロフィールを確認する
+    </a>
+    <a class="item" href="{% url 'accounts:logout' %}">
+        <i class="ui centerd key icon"></i>
+        ログアウトする
+    </a>
+    <!-- 検索フォーム -->
+    <div class="item">
+        <form class="ui form" action="{% url 'search:result' %}" method="GET">
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <input type="text" placeholder="検索する" name="q">
+                </div>
+                <div class="one wide column">
+                    <button type="submit" class="ui button" value="">
+                        <i class="search icon"></i>
+                    </button>
+                </div>
             </div>
-            <div class="user_icon_image">
-                <a href="{% url 'accounts:profile' %}">
-                <img src="static/images/icon_user.png" alt="">
-                <p class="text_for_icon">ユーザー情報</p>
-                </a>
-            </div>
-        </div>
+        </form>
     </div>
+    <!-- 検索フォーム終わり -->
 </div>
+<!-- メニュー終わり -->
 {% block content %}
 {% if user.is_authenticated %}
-<!-- 検索フォームスタート -->
-<form class="search_box" action="{% url 'search:result' %}" method="GET">
-    <div class="" style="width: 100%;">
-        <input type="text" placeholder="キーワード検索" name="q">
-        <input type="submit" class="" value="検索する">
-    </div>
-</form> 
-<!-- 検索フォーム終わり -->
 <!-- 思い出一覧 -->
-<div class="post_table">
-{% for omoide in omoide_list %}
-    <div class="post_base">
-        <div class="edit_btn"><a href="{% url 'base:confirm_omoide' pk=omoide.pk%}">🖋</a></div>
-        {% if omoide.thumbnail %}
-        <a href="{{omoide.thumbnail.url}}" target="_blank" rel="noopener noreferrer"><img src="{{omoide.thumbnail.url}}" width=300px class="thumbnail"></a>
-        {% endif %}
-        <p class="post_title"><a href="{% url 'base:post' pk=omoide.id %}">{{omoide.title}}</a></p>
+<div class="ui stackable grid">
+    {% for omoide in omoide_list %}
+    <div class="four wide column">
+        <div class="ui card">
+            {% if omoide.thumbnail %}
+                <a class="image" href="{% url 'base:post' pk=omoide.id %}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{omoide.thumbnail.url}}" class="thumbnail">
+                </a>
+            {% endif %}
+                <div class="content">
+                    <a class="header" href="{% url 'base:post' pk=omoide.id %}">
+                        {{omoide.title}}
+                    </a>
+                    <div class="meta">
+                        <span class="date">{{omoide.posttime}}に作ったよ</span>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a href="{% url 'base:confirm_omoide' pk=omoide.pk%}">
+                        <i class="edit outline icon"></i>
+                        思い出を編集する
+                    </a>
+                </div>
+        </div>
     </div>
-{% endfor %}
+    {% endfor %}
+    </div>
 </div>
 <!-- 思い出一覧終わり -->
 <!-- ページネーション -->
 {% include "pagination.html" %}
 <!-- 思い出作成ボタン -->
-<div class="post_btn"><a href="{% url 'base:create_omoide' %}">思い出を残す</a></div>
+<div class="post_btn"
+    ><a href="{% url 'base:create_omoide' %}">思い出を残す</a>
+</div>
+<!-- 思い出作成ボタン -->
 {% endif %}
 {% endblock %}
 </body>

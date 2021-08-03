@@ -1,27 +1,17 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕ログインしてね💕</p>
-<form class="" action="" method="POST">
+<div class="ui medium header">💕ログインしてね💕</div>
+<form class="ui form error" action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button class="login_btn_on_login" value="confirm" type="submit">ログイン</button>
+    {% for field in form %}
+    <div class="field">
+        {{field.label_tag}}
+            {{field}}
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button class="fluid ui teal button" value="confirm" type="submit">ログイン</button>
 </form>
-
-    <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼氏さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">ふたりのパスワード</p>
-    <div class="login_input"></div>
-    <p class="signup_btn_on_signup">サインアップ</p> -->
-
-    <!-- <p class="inputform_description">メールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">パスワード</p>
-    <div class="login_input"></div>
-    <p class="login_btn_on_login">ログイン</p> -->
 {% endblock %}

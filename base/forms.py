@@ -1,10 +1,13 @@
-from django.forms import ModelForm
+from django.forms import ModelForm,FileInput
 from django import forms
 from django.db.models import Q
 from . models import OmoideTran,TextTran,CoupleMaster
 import datetime
 
 class OmoideCreateForm(forms.ModelForm):
+
+    # thumbnail = forms.ImageField(widget=MyImageWidget)
+
     class Meta:
         model=OmoideTran
         fields=[
@@ -13,13 +16,15 @@ class OmoideCreateForm(forms.ModelForm):
             'thumbnail',
         ]
         widgets = {
-            'posttime': forms.SelectDateWidget(years=[x for x in range(1990, 2099)])
+            'posttime': forms.SelectDateWidget(years=[x for x in range(2000, 2031)],
+                        empty_label=("何年？","何月？","何日？")),
         }
     def __init__(self, *args, **kwargs):
+        # super().__init__(*args, **kwargs)
         super().__init__(*args, **kwargs)
-
+        
     def save(self,user,commit=True,**kwargs):
-        # フォームのインスタンスomoideを作成
+        # フォームのインスタンスomoideを作成,""
         omoide = super().save(commit=False)
         # CoupleMasterのインスタンスが必要
         couple_instance = CoupleMaster.objects.get(
@@ -33,10 +38,15 @@ class OmoideCreateForm(forms.ModelForm):
 class TextModelForm(forms.ModelForm):
     class Meta:
         model=TextTran
-        fields=[
+        fields = [
             'text',
             'image',
         ]
+        widgets = {
+
+            'text': forms.TextInput(attrs={'placeholder': 'メッセージを入力してね!'}),
+
+        }
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')

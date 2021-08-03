@@ -1,31 +1,31 @@
 {% extends 'top.html' %}
 {% block content %}
-<p>💕入力内容を確認してね💕</p>
-<div>ニックネーム：{{form.cleaned_data.username}}</div>
-<div>メールアドレス:{{form.cleaned_data.email}}</div>
-{% for temp in men_id%}
-<div>{{temp}}</div>
-{% endfor %}
-<div>パスワード:********</div>
-            
-<form class="" action="" method="POST">
+<div class="ui medium header">💕入力内容を確認してね💕</div>
+<div class="ui list">
+    <div class="item">
+        <i class="user icon"></i>
+        <div class="content">
+            ニックネーム：{{form.cleaned_data.username}}
+        </div>
+    </div>
+    <div class="item">
+        <i class="mail icon"></i>
+        <div class="content">
+            メールアドレス:{{form.cleaned_data.email}}
+        </div>
+    </div>
+    <div class="item">
+        <i class="key icon"></i>
+        <div class="content">パスワード:********</div>
+    </div>
+</div>   
+<form class="ui form" action="" method="POST">
     {% csrf_token %}
     {% for field in form %}
     {{field.as_hidden}}
     {% endfor %}
-    <button class="" name="next" value="back" type="submit">修正</button>
-    <button class="" name="next" value="regist" type="submit">登録</button>
+    <button class="fluid ui teal button" name="next" value="regist" type="submit">登録</button>
+    <div class="ui hidden divider"></div>
+    <button class="fluid ui button" name="next" value="back" type="submit">修正</button>
 </form>
-
-    <!-- <p class="inputform_description">彼氏さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼氏さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのニックネーム</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">彼女さんのメールアドレス</p>
-    <div class="login_input"></div>
-    <p class="inputform_description">ふたりのパスワード</p>
-    <div class="login_input"></div>
-    <p class="signup_btn_on_signup">サインアップ</p> -->
 {% endblock %}

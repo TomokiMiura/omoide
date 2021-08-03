@@ -11,11 +11,28 @@ body {
     background-color: #FEF6E4;
     height: 100%;
     position: relative;
+    padding: 10px;
     
 }
 /* 全てのリンクに表示されるアンダーラインを削除 */
 a {
     text-decoration:none; 
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
+.confirm_thumbnail a:visited{
+
+    color: #000000;
+
+}
+
+.confirm_thumbnail a:hover{
+
+    color: #dedede;
+
 }
 
 .top_left,.top_right{
@@ -118,7 +135,7 @@ a {
 
     width: 500px;
     height: 50px;
-    box-shadow: 5px 5px 10px 0px #333333;
+    box-shadow: 1px 1px 3px 0px #333333;
 
     display: flex;
     justify-content: center; /*左右中央揃え*/
@@ -422,9 +439,16 @@ button {
     margin-top: 0;
     font-size: 8px;
     width: 48px;
+    color:#000000;
     font-weight: bold;
     text-align: center;
     margin-bottom: 0;
+
+}  
+
+.text_for_icon:visited{
+
+    color: #000000;
 
 }  
 
@@ -530,6 +554,45 @@ button {
     color: #fff;
     padding: 8px 16px;
     font-size: 16px;
-    margin-right: 50px;
+    margin-left: 25%;
 
 }
+
+.back_text{
+
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left: 25%;
+    font-size: 11px;
+
+}
+
+.for_label{
+
+    position: relative;
+
+}
+
+/* 投稿編集画面でクリアのチェックボックス、ラベルを削除する */
+
+.confirm_thumbnail input[type="checkbox"],label[for="thumbnail-clear_id"]{
+
+    visibility: hidden;
+
+}
+
+/* サムネイルにタグをつける */
+
+.thumbnail_tag{
+
+    position: relative;
+
+}
+
+.comment_image_form{
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
