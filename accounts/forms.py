@@ -1,6 +1,4 @@
 from django.forms import ModelForm
-# from django.contrib.auth.models import User
-# from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
     AuthenticationForm, PasswordChangeForm,
     PasswordResetForm, SetPasswordForm,
@@ -8,8 +6,6 @@ from django.contrib.auth.forms import (
 )
 
 from .models import User
-
-# UserModel = get_user_model()
 
 class UserInfoChangeForm(ModelForm):
     class Meta:
@@ -22,7 +18,6 @@ class UserInfoChangeForm(ModelForm):
     def __init__(self, email=None, username=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
-        # ユーザーの更新前情報をフォームに挿入
         if email:
             self.fields['email'].widget.attrs['value'] = email
         if username:
@@ -32,23 +27,6 @@ class UserInfoChangeForm(ModelForm):
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
         user.save()
-
-class EmailChangeForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['email']
-
-    def __init__(self, email=None, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')
-        super().__init__(*args, **kwargs)
-        # ユーザーの更新前情報をフォームに挿入
-        if email:
-            self.fields['email'].widget.attrs['value'] = email
-
-    def update(self, user):
-        user.email = self.cleaned_data['email']
-        user.save()
-
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -74,14 +52,6 @@ class AdminUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email',)
-    
-    # def save(self, commit=True):
-    #     user = User.objects.create_user(
-    #         self.cleaned_data["name"],
-    #         self.cleaned_data["email"],
-    #         self.cleaned_data["password1"],
-    #     )
-    #     return user
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:

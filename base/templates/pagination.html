@@ -27,29 +27,3 @@
     </div>
 </div>
 {% endif %}
-
-<!-- {% if is_paginated %}
-{% if page_obj.has_previous %}
-  <div class="ui pagination menu">
-    <a class="item" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-      ←
-    </a>
-  {% endif %}
-  {% for num in paginator.page_range %}
-  {% if page_obj.number == num %}
-    <a class="active item">
-      {{ num }}
-    </a>
-  {% else %}
-    <a class="item" href="?page={{ num }}">
-      {{ num }}
-    </a>
-  {% endif %}
-  {% endfor %}
-  {% if page_obj.has_next %}
-    <a class="item" href="?page={{ page_obj.next_page_number }}">
-      →
-    </a>
-  {% endif %}
-  </div>
-{% endif %} -->

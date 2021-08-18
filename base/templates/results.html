@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+{% block title %}{{ block.super }}{% endblock %}
+{% block content %}
+<h1 class="ui center aligned header">
+    <i class="search icon"></i>検索結果 - {{query}}
+</h1>
+<!-- 検索結果表示 -->
+<div class="ui stackable grid">   
+    {% if result_list %}
+        {% for result in result_list %}
+        <div class="four wide column">
+            <div class="ui card">
+                {% if result.thumbnail %}
+                    <a class="image" href="{% url 'base:post' pk=result.id %}" target="_blank" rel="noopener noreferrer">
+                            <img src="{{result.thumbnail.url}}" class="thumbnail">
+                    </a>
+                {% endif %}
+                    <div class="content">
+                        <a class="header" href="{% url 'base:post' pk=result.id %}">
+                            {{result.title}}
+                        </a>
+                        <div class="meta">
+                            <span class="date">{{result.posttime}}に作ったよ</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a href="{% url 'base:confirm_omoide' pk=result.pk%}">
+                            <i class="edit outline icon"></i>
+                            思い出を編集する
+                        </a>
+                    </div>
+            </div>
+        </div>
+        <!-- <div class="post_base">
+            <p class="post_title"><a href="{% url 'base:post' pk=result.id %}">{{result.title}}</a></p>
+        </div> -->
+        {% endfor %}
+    {% else %}
+        <div class="center aligned column">
+            <p>ごめんね...🥺</p>
+            <p>見つからなかったの...</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

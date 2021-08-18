@@ -117,6 +117,9 @@ LOGIN_REDIRECT_URL = '/home'
 # ログアウト後のリダイレクト先のURL
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
+# 未ログインのユーザーがアクセスした場合にログインページを表示する
+LOGIN_URL = '/accounts/login'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 

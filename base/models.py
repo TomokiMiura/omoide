@@ -3,26 +3,6 @@ from accounts.models import User
 from django.core.validators import FileExtensionValidator
 
 # Create your models here
-class CoupleMasterManager(models.Manager):
-
-    pass
-
-class MenMasterManager(models.Manager):
-
-    pass
-
-class GirlMasterManager(models.Manager):
-
-    pass
-
-class OmoideTranManager(models.Manager):
-
-    pass
-
-class TextTranManager(models.Manager):
-
-    pass
-
 class CoupleMaster(models.Model):
 
     men_id = models.ForeignKey(
@@ -40,8 +20,6 @@ class CoupleMaster(models.Model):
         null=True,
         blank=True,
     )
-
-    objects = CoupleMasterManager()
 
 class OmoideTran(models.Model):
 
@@ -79,8 +57,6 @@ class OmoideTran(models.Model):
         blank=True,
     )
 
-    objects = OmoideTranManager()
-
     def __str__(self):
         return self.title
 
@@ -96,6 +72,7 @@ class TextTran(models.Model):
     )
 
     author_id = models.ForeignKey(
+
         User,
         on_delete=models.CASCADE,
         null=False,
@@ -125,8 +102,6 @@ class TextTran(models.Model):
         null=True,
         blank=True,
     )
-
-    objects = TextTranManager()
 
     def __str__(self):
         return self.text

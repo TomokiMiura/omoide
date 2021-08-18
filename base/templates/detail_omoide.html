@@ -37,14 +37,13 @@
     <!-- 画像の表示終わり -->
     {% if comment.text %}
     <!-- テキストメッセージの表示 -->
-    <!-- LGBTの方の投稿表示 -->
         {% if comment.author_id.is_men %}
             <!-- 男の子の投稿表示 -->
             <div class="ui tertiary inverted teal center aligned raised padded text container segment">
                     {{comment.text}}
             </div>
         {% else %}
-            <!-- 女の子が投稿したら背景が -->
+            <!-- 女の子の投稿表示 -->
             <div class="ui tertiary inverted pink center aligned raised padded text container segment">
                 {{comment.text}}
             </div>

@@ -8,9 +8,7 @@ from .forms import (
 app_name = 'accounts'
 
 urlpatterns = [
-    # 男性ユーザーのサインアップURL
     path('signup_men/', views.MenUserCreateView.as_view(), name="create_men_user"),
-    # 女性ユーザーのサインアップURL
     path('signup_girl/', views.GirlUserCreateView.as_view(), name="create_girl_user"),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),

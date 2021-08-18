@@ -44,10 +44,10 @@
 </div>
 <!-- メニュー終わり -->
 {% block content %}
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated %}
 <!-- 思い出一覧 -->
 <div class="ui stackable grid">
-    {% for omoide in omoide_list %}
+    {% for omoide in omoidetran_list %}
     <div class="four wide column">
         <div class="ui card">
             {% if omoide.thumbnail %}
