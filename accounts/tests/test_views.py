@@ -294,7 +294,7 @@ class CustomPasswordResetConfirmViewTests(TestCase):
 
     def test_email_from(self):
         """パスワードリセットメールの送信元のテスト"""
-        self.assertEqual('test.mail.for.omoide@gmail.com', self.email.from_email)
+        self.assertEqual('omoide.contact.official@gmail.com', self.email.from_email)
 
 class CustomPasswordResetCompleteViewTests(TestCase):
     """CustomPasswordResetCompleteViewのテストクラス"""

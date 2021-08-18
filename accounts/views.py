@@ -122,7 +122,7 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
 class CustomPasswordResetView(PasswordResetView):
     email_template_name = 'password_reset_email.html'
     form_class = CustomPasswordResetForm
-    from_email = 'test.mail.for.omoide@gmail.com'
+    from_email = 'omoide.contact.official@gmail.com'
     subject_template_name = 'password_reset_subject.txt'
     success_url = reverse_lazy('accounts:password_reset_done')
     template_name = 'password_reset_form.html'
