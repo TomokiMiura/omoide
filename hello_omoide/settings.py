@@ -10,21 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import environ
 from pathlib import Path
 import os
 
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$f)epk2r04z#r#b30da_(q23p$(y5@vdac=gdyi$z%rs-dm4$9'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -41,8 +44,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'base',
     'search',
-    # アカウント管理機能のため追加 現場で使えるDjango実践編参照
     'accounts',
+    'app.apps.AppConfig',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -86,10 +89,7 @@ WSGI_APPLICATION = 'hello_omoide.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(),
 }
 
 
