@@ -15,11 +15,8 @@ body {
     
 }
 /* 全てのリンクに表示されるアンダーラインを削除 */
-a {
+a,a:visited,a:hover{
     text-decoration:none; 
-}
-
-a:visited {
     color: #FFFFFF;
 }
 

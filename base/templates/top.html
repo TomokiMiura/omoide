@@ -11,24 +11,30 @@
 <section class="top_left">
         <div class="top_title">
             <p class="main_title">OMOIDE</p>
-            <p class="sub_title">カップル専用 デジタル日記</p>
+            <p class="sub_title">カップル専用 オンライン日記</p>
             <p class="sub_title">二人の思い出をいつでもどこでも</p>
         </div>
 </section> 
 <section class="top_right">
     <div class="top_btn">
         {% block content %}
-        <button class="fluid ui teal button">
-            <a href = "{% url 'accounts:login' %}">ログイン</a>
-        </button>
-        <div class="ui hidden divider"></div>
-        <button class="fluid ui pink button">
-            <a href = "{% url 'accounts:create_men_user' %}">はじめての方はこちら</a>
-        </button>
-        <div class="ui hidden divider"></div>
-        <button class="fluid ui button">
-            <a href = "{% url 'accounts:password_reset' %}">パスワードをお忘れの方はこちら</a>
-        </button>
+        <div class="ui relaxed items">
+            <div class="item">
+                <button class="fluid ui teal button">
+                    <a href = "{% url 'accounts:login' %}">ログイン</a>
+                </button>
+            </div>
+            <div class="item">
+                <button class="fluid ui pink button">
+                    <a href = "{% url 'accounts:create_men_user' %}">はじめての方はこちら</a>
+                </button>
+            </div>
+            <div class="item">
+                <button class="fluid ui button">
+                    <a href = "{% url 'accounts:password_reset' %}">パスワードをお忘れの方はこちら</a>
+                </button>
+            </div>
+        </div>
         {% endblock %}
     </div>
 </section>
