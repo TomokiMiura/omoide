@@ -27,9 +27,11 @@ env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True 本番環境のためコメントアウト
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [] 本番環境のためコメントアウト
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 # Application definition
 
@@ -121,6 +123,10 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 # 未ログインのユーザーがアクセスした場合にログインページを表示する
 LOGIN_URL = '/accounts/login'
 
+###############################
+#          language           #
+###############################
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -134,6 +140,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+###############################
+#           static            #
+###############################
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -144,14 +153,25 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = '/usr/share/nginx/html/static'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+###############################
+#           media             #
+###############################
+
 # media：画像の保存先
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 本番環境のためコメントアウト
+MEDIA_ROOT = '/usr/share/nginx/html/media'
 MEDIA_URL = '/media/'
+
+###############################
+#           cache             #
+###############################
 
 CACHES = {
     'default': {
@@ -171,3 +191,61 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'omoide.contact.official@gmail.com'
 EMAIL_HOST_PASSWORD = 'ogata0215'
 EMAIL_USE_TLS = True
+
+###############################
+#          Logging            #
+###############################
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    # ロガーの設定
+    'loggers': {
+        #Djangoが使用するロガー
+        'django':{
+            'handlers':['file'],
+            'level':'INFO',
+        },
+        # baseアプリが使用するロガー
+        'base':{
+            'handlers':['file'],
+            'level':'INFO',
+        },
+        # accountsアプリが使用するロガー
+        'accounts':{
+            'handlers':['file'],
+            'level':'INFO',
+        },
+        # searchアプリが使用するロガー
+        'search':{
+            'handlers':['file'],
+            'level':'INFO',
+        },
+    },
+
+    #ハンドラの設定
+    'handlers':{
+        'file':{
+            'level':'INFO',
+            'class':'logging.handlers.TimedRotatingFileHandler',
+            'filename':os.path.join(BASE_DIR,'omoide_logs/omoide.log'),
+            'formatter':'prod',
+            'when':'D',
+            'interval':1,
+            'backupCount':7,
+        },
+    },
+
+    # フォーマッタの設定
+    'formatters':{
+        'prod':{
+            'format':'\t'.join([
+                '%(asctime)s',
+                '[%(levelname)s]',
+                '%(pathname)s(Line:%(lineno)d)',
+                '%(message)s'
+            ])
+        },
+    }
+}
