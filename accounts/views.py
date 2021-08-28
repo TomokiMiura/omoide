@@ -84,24 +84,14 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context['email'] = user.email
         return context
 
-class UserChangeView(LoginRequiredMixin, FormView):
+class UserChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'change.html'
-    form_class = UserInfoChangeForm
+    fields = ('username', 'email')
+    model = User
     success_url = reverse_lazy('accounts:profile')
     
-    def form_valid(self, form):
-        #formのupdateメソッドにログインユーザーを渡して更新
-        form.update(user=self.request.user)
-        return super().form_valid(form)
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        # 更新前のユーザー情報をkwargsとして渡す
-        kwargs.update({
-            'email' : self.request.user.email,
-            'username' : self.request.user.username,
-        })
-        return kwargs
+    def get_object(self):
+        return self.request.user
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
